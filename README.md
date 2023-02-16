@@ -35,6 +35,8 @@ go-cqhtth官网:    https://docs.go-cqhttp.org/
     https://www.bilibili.com/video/BV1984y1b7JY?p=2&share_source=copy_web
   
     ❗❗在安装时，请把插件保存目录放到src文件夹中
+    
+    如果你打算直接运行我这个github项目，就可以跳过这一步
   
   2)🛠️安装go-cqhttp(你也可以使用Nonebot中的go-cqhttp插件)
     
