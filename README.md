@@ -9,7 +9,7 @@
 Nonebot官网:      https://v2.nonebot.dev/
 go-cqhtth官网:    https://docs.go-cqhttp.org/
 
-献丑了，家人们，我python是现学的，做这个项目的时候刚自学py不到4天(2023.1.13开始学)，怎么使用Github也是现学的，如果出现任何问题，请在issue中提问
+献丑了😅，家人们，我python是现学的，做这个项目的时候刚自学py不到4天(2023.1.13开始学)，怎么使用Github也是现学的，如果出现任何问题，请在issue中提问🤷
 
 ❓已知问题请查看issue部分
 
