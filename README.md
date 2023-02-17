@@ -86,7 +86,7 @@ https://www.bilibili.com/video/BV1Mx4y1c718/?spm_id_from=333.788.header_right.hi
     
     3.🚀启动go-cqhttp
     
-    4.🚀启动Nonebot
+    4.🚀🐍💻进入机器人所在的文件夹，并启动机器人生成时候自动创建的虚拟环境，在虚拟环境中启动Nonebot
     
     ✅完成🎉🎉🎉
     
