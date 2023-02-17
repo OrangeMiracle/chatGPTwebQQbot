@@ -81,6 +81,8 @@ https://www.bilibili.com/video/BV1Mx4y1c718/?spm_id_from=333.788.header_right.hi
     2.🌏使用项目中附带的chatGPT.lnk打开谷歌浏览器，并且打开GPT页面，登陆你自己的chatGPT账号
     
       一定要用附带的谷歌浏览器快捷方式先手动打开chatGPT网页版，并且登录你自己的账号
+      
+      (这个chatGPT.lnk是chrome浏览器的快捷方式，但是添加了一些参数，你再打开之前应该把 “右键->属性” 其中指向chrome.exe的地址改成你自己电脑上chrome.exe的地址)
     
     3.🚀启动go-cqhttp
     
