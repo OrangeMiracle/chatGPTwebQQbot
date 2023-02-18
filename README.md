@@ -63,6 +63,8 @@ https://www.bilibili.com/video/BV1Mx4y1c718/?spm_id_from=333.788.header_right.hi
       pip install html
     
       pip install selenium
+      
+      如果出现安装失败可以试试替换pip为pip3
     
   4)💾安装插件
   
