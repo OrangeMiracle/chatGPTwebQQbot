@@ -28,6 +28,8 @@ Reverse Engineered ChatGPT API:     https://github.com/acheong08/ChatGPT
 
 5.每个人可以用一个单独的对话框
 
+6.黑名单功能 ./js/blacklist 文件中填上要加黑名单人的QQ号，每个一行
+
 ==========💬一些废话💬==========
 
 隔壁大佬做的
