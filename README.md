@@ -6,14 +6,29 @@
 大佬的空间     https://space.bilibili.com/3493075036932748/
 大佬提供的代码 https://www.bilibili.com/read/cv20610733?spm_id_from=333.999.0.0
 
+本项目基于
+
 Nonebot官网:      https://v2.nonebot.dev/
+
 go-cqhttp官网:    https://docs.go-cqhttp.org/
+
+Reverse Engineered ChatGPT API:     https://github.com/acheong08/ChatGPT
 
 献丑了😅，家人们，我python是现学的，做这个项目的时候刚自学py不到4天(2023.1.13开始学)，怎么使用Github也是现学的，如果出现任何问题，请在issue中提问🤷
 
+目前功能
+
+1.支持选择打开网页或者不打开网页登陆账号（如果选择启用 “需要打开网页的功能” 这个功能只能登陆一个账号，但是可以与 ”不打开网页登陆账号“ 的功能同时存在
+
+2.多人同时提问
+
+3.多账号支持
+
+4.绕过网页检测
+
 ==========💬一些废话💬==========
 
-另外，如果你的GPT账号是直接通过输入邮箱账号和密码登陆的话，而不是选择下面的“使用谷歌登陆账号”或者“使用微软登陆账号”，可以不用看我这个项目了，B站有更好的项目
+隔壁大佬做的
 
 https://www.bilibili.com/video/BV1Mx4y1c718/?spm_id_from=333.788.header_right.history_list.click&vd_source=204ca2d530f8a482c037153b136d1b0b
 
@@ -27,9 +42,11 @@ https://www.bilibili.com/video/BV1Mx4y1c718/?spm_id_from=333.788.header_right.hi
 
 1.🖥️确认你的运行环境
 
-    你将会需要
+    在开始之前，你将会需要
   
       1)🏠一个Windows系统   (如果你想要使用其他系统的话，请确保能够打开chrome浏览器，并且python能够通过selenium库操作浏览器)
+      
+        如果你选择一直都不启用 “需要打开网页的功能” 那理论上可以在命令行终端运行
   
       2)🐍一个python环境
   
@@ -38,6 +55,8 @@ https://www.bilibili.com/video/BV1Mx4y1c718/?spm_id_from=333.788.header_right.hi
 
 2.⚙️如何配置
 
+    如果你打算直接运行我这个github项目，就可以跳过 "安装Nonebotv2" 这一步
+
   1)🛠️安装Nonebotv2，这里有一些安装教程，不再过多赘述
   
     https://v2.nonebot.dev/docs/start/installation
@@ -45,8 +64,6 @@ https://www.bilibili.com/video/BV1Mx4y1c718/?spm_id_from=333.788.header_right.hi
     https://www.bilibili.com/video/BV1984y1b7JY?p=2&share_source=copy_web
   
     ❗❗在安装时，请把插件保存目录放到src文件夹中
-    
-    如果你打算直接运行我这个github项目，就可以跳过这一步
   
   2)🛠️安装go-cqhttp(你也可以使用Nonebot中的go-cqhttp插件)
     
@@ -64,7 +81,11 @@ https://www.bilibili.com/video/BV1Mx4y1c718/?spm_id_from=333.788.header_right.hi
     
       pip install selenium
       
-      如果出现安装失败可以试试替换pip为pip3
+      pip install aiocqhttp
+      
+      pip install sqlite3
+      
+      如果出现安装失败可以试试替换pip为pip3，如果还是失败，请在issue提出
     
   4)💾安装插件
   
@@ -75,12 +96,20 @@ https://www.bilibili.com/video/BV1Mx4y1c718/?spm_id_from=333.788.header_right.hi
     在我的github项目中找到  chatGPTwebQQbot/chatGPTQQbot/js
     
     把整个js文件夹放进你刚刚创建的Nonebot机器人的  ./<你机器人的名字>/   文件夹中
+    
+    填写你的账号到js文件夹下的ghotmail_account.csv和user_account.csv
+    
+    user_account.csv对应使用邮箱登陆的账号
+    
+    ghotmail_account.cs对应使用 __Secure-next-auth.session-token    登陆的账号
+    
+    请根据文件夹中提供的格式进行填写，注意逗号要用英文逗号，以及最顶上的列名不可删除，每个账号占用一行，请手动回车换行   
   
   5)🚀启动
     
     1.🌟挂上你的梯子进行魔法上网
     
-    2.🌏使用项目中附带的chatGPT.lnk打开谷歌浏览器，并且打开GPT页面，登陆你自己的chatGPT账号
+    2.🌏使用项目中附带的chatGPT.lnk打开谷歌浏览器，并且打开GPT页面，登陆你自己的chatGPT账号    （如果没有开启 “需要打开网页的功能” 这个功能, 请忽略这一步）
     
       一定要用附带的谷歌浏览器快捷方式先手动打开chatGPT网页版，并且登录你自己的账号
       
