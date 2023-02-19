@@ -103,7 +103,7 @@ https://www.bilibili.com/video/BV1Mx4y1c718/?spm_id_from=333.788.header_right.hi
     
     ghotmail_account.cs对应使用 __Secure-next-auth.session-token    登陆的账号
     
-    请根据文件夹中提供的格式进行填写，注意逗号要用英文逗号，以及最顶上的列名不可删除，每个账号占用一行，请手动回车换行   
+    请根据文件夹中提供的格式进行填写，注意逗号要用英文逗号，以及最顶上的列名不可删除，每个账号占用一行，请手动回车换行,plus_status根据你这个账号有没有充值plus版，有就填true，没有就false
   
   5)🚀启动
     
