@@ -121,7 +121,7 @@ https://www.bilibili.com/video/BV1Mx4y1c718/?spm_id_from=333.788.header_right.hi
     
     ✅完成🎉🎉🎉
     
-    使用  @机器人!h 来发送菜单
+    使用  @机器人!h 来发送菜单    如果没有学则开启 “需要开启浏览器的功能” 菜单也就没用啦
 
 
 
