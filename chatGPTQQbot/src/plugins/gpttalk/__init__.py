@@ -29,7 +29,7 @@ class Gpt_account:
         self.status = status_
 
 #active_nobowser=False   #启动不需要打开浏览器的部分
-active_bowser=False or  nonebot.get_driver().config.active_bowser     #启动需要打开浏览器的部分,在.env.dev文件中修改，默认为False
+active_bowser=(False or not('false' in str(nonebot.get_driver().config.active_bowser).lower()))     #启动需要打开浏览器的部分,在.env.dev文件中修改，默认为False
 conn = sqlite3.connect('./js/qqgroup_userinfo.db')
 c = conn.cursor()
 # conn.close()
