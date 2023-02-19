@@ -1,3 +1,7 @@
 cd .\chatGPTQQbot
 .\.venv\Scripts\activate.ps1
 nb run --reload
+
+
+
+pip install aiocqhttp
