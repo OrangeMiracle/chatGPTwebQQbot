@@ -89,6 +89,10 @@ https://www.bilibili.com/video/BV1Mx4y1c718/?spm_id_from=333.788.header_right.hi
       
       pip install sqlite3
       
+      pip install revChatGPT
+      
+      pip install quart
+      
       如果出现安装失败可以试试替换pip为pip3，如果还是失败，请在issue提出
     
   4)💾安装插件
