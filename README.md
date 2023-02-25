@@ -81,6 +81,8 @@ https://www.bilibili.com/video/BV1Mx4y1c718/?spm_id_from=333.788.header_right.hi
     
   3)🐍配置虚拟环境
   
+    解决Windows下PowerShell无法进入Python虚拟环境 需要以管理员运行PowerShell，然后执行命令：    Set-ExecutionPolicy RemoteSigned
+  
     在启动bot之前，请先进入Nonebot为你生成的虚拟环境，添加以下的包
     
       pip install html
