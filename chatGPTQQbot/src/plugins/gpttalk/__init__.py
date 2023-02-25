@@ -130,8 +130,9 @@ async def _(event: GroupMessageEvent):
     #查看是是否在黑名单
     if str(uid) in black_list:
         await word.finish(Message(f"[CQ:at,qq={uid}]你在黑名单中,不可使用"))
-
-    #在表中寻找提问的人是否存在，如果不存在，则从gpt账号列表中寻找目前空闲的账号，创建这一行
+    if (len(get_gpt_accounts()) < 1):
+        await word.finish(Message(f"[CQ:at,qq={uid}]没有登陆任何GPT账号"))
+    #在数据库中寻找提问的人是否存在，如果不存在，则从gpt账号列表中寻找目前空闲的账号，创建这一行
     #这里其实应该用map或者dictionary之类的来定位空闲的gpt账号，但是我还没搞懂python里怎么用这些东西，刚学没多久🤣
     user_msg = event.message
     c.execute("SELECT * FROM userinfo WHERE userid = ?", [str(uid)])
@@ -147,6 +148,8 @@ async def _(event: GroupMessageEvent):
                 if(str(row[3]) in str(account_list[i].bot.get_conversations())): #2.它使用的对话是否还存在
                     while('working' in account_list[i].status):
                         time.sleep(0.5)
+                        account_list = get_gpt_accounts()
+                    
                     account_list[i].status = 'working'
                     set_gpt_accounts(account_list)
 
@@ -160,6 +163,8 @@ async def _(event: GroupMessageEvent):
 
                     await word.finish(Message(f"[CQ:at,qq={uid}]GPT {email}:\n{gpt_result}"))
                     break
+                else:
+                    break
             i = i + 1
 
     #这里放一个更新点，如果有GPT账户没有被任何人使用，那就给用户分配那个没被使用的账户
@@ -170,18 +175,19 @@ async def _(event: GroupMessageEvent):
     log(f'新用户{uid}') 
     
     while(True):
-        log('while 1')
+        log('新用户while')
         i = 0
         time.sleep(0.5)
         account_list = get_gpt_accounts()
         for x in account_list:
-            time.sleep(.05)
-            if('working' in x.status):  #为啥要用一个状态来标记当前任务是否能用呢，因为我还没学会多线程
-                pass
+            time.sleep(0.2)
+            if('working' in x.status):  #为啥我要用一个list里面的值表示状态来标记当前任务是否能用呢，因为我还没学会多线程😅
+                account_list = get_gpt_accounts()
             else:
                 account_list[i].status = 'working'
                 set_gpt_accounts(account_list)
 
+                account_list[i].bot.reset_chat()
                 bot = account_list[i].bot
                 email = account_list[i].email
                 groupid = event.group_id
@@ -192,6 +198,7 @@ async def _(event: GroupMessageEvent):
                 c.execute("INSERT INTO userinfo (userid, groupid, gptaccount,conversationid) VALUES (?, ?,?,?)", (str(uid),str(groupid),str(email),str(covid)))
                 conn.commit()
 
+                account_list = get_gpt_accounts()
                 account_list[i].status = 'finish'
                 set_gpt_accounts(account_list)
                 await word.finish(Message(f"[CQ:at,qq={uid}]GPT {email}:\n{gpt_result}"))               
@@ -270,22 +277,22 @@ if(active_bowser):
         await word.finish(Message(f"[CQ:at,qq={uid}]{str(chatgpt.GPT_status)}"))
 
 
-#菜单
-menu_awake=on_keyword({"!h"},rule=to_me(),block=True,priority=10)
-@menu_awake.handle()
-async def _(event: GroupMessageEvent):
-    uid=event.user_id
-    _a= '\n❓📖chatGPT机器人帮助菜单🧑‍💻\n'
-    a = '❓!h     --帮助菜单\n'
-    b = '↩️!b     --返回最后一次GPT的回答\n'
-    c = '🔄!f5    --刷新网页\n'
-    d = '📡!redo  --重新生成\n'
-    e = '🧐!st    --查看GPT状态\n'
-    menu_str = _a+a+b+c+d+e
-    if(active_bowser):
-        f = '🌐!boww  --使用浏览器提问!bww+空格+要问的问题\n'
-        menu_str = menu_str + f
-    await word.finish(Message(f"[CQ:at,qq={uid}]{menu_str}"))
+    #菜单
+    menu_awake=on_keyword({"!h"},rule=to_me(),block=True,priority=10)
+    @menu_awake.handle()
+    async def _(event: GroupMessageEvent):
+        uid=event.user_id
+        _a= '\n❓📖chatGPT机器人帮助菜单🧑‍💻\n'
+        a = '❓!h     --帮助菜单\n'
+        b = '↩️!b     --返回最后一次GPT的回答\n'
+        c = '🔄!f5    --刷新网页\n'
+        d = '📡!redo  --重新生成\n'
+        e = '🧐!st    --查看GPT状态\n'
+        menu_str = _a+a+b+c+d+e
+        if(active_bowser):
+            f = '🌐!boww  --使用浏览器提问!bww+空格+要问的问题\n'
+            menu_str = menu_str + f
+        await word.finish(Message(f"[CQ:at,qq={uid}]{menu_str}"))
 
 
 
