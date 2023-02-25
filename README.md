@@ -60,8 +60,16 @@ https://www.bilibili.com/video/BV1Mx4y1c718/?spm_id_from=333.788.header_right.hi
 2.⚙️如何配置
 
     如果你打算直接运行我这个github项目，就可以跳过 "安装Nonebotv2" 这一步
+    
+  1)🛠️安装go-cqhttp(你也可以使用Nonebot中的go-cqhttp插件)
+    
+    这里是官方教程
+    
+    https://docs.go-cqhttp.org/guide/quick_start.html#%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B
+    
 
-  1)🛠️安装Nonebotv2，这里有一些安装教程，不再过多赘述
+
+  2)🛠️安装Nonebotv2，这里有一些安装教程，不再过多赘述
   
     https://v2.nonebot.dev/docs/start/installation
   
@@ -69,12 +77,6 @@ https://www.bilibili.com/video/BV1Mx4y1c718/?spm_id_from=333.788.header_right.hi
   
     ❗❗在安装时，请把插件保存目录放到src文件夹中
   
-  2)🛠️安装go-cqhttp(你也可以使用Nonebot中的go-cqhttp插件)
-    
-    这里是官方教程
-    
-    https://docs.go-cqhttp.org/guide/quick_start.html#%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B
-    
     在以上两项都安装完成并进行基础配置，确保他们能够互相通信
     
   3)🐍配置虚拟环境
