@@ -2,6 +2,7 @@
 
 var elements = document.evaluate("(//div[@class='markdown prose w-full break-words dark:prose-invert dark'])[last()]", document, null, XPathResult.ANY_TYPE, null);
 var element = elements.iterateNext();
+var childElements = element.querySelectorAll('p, pre, ol > li,table');
 var output = "";
 
 var toomany_elements = document.evaluate("(//div[@class='w-full border-b border-black/10 dark:border-gray-900/50 text-gray-800 dark:text-gray-100 group bg-gray-50 dark:bg-[#444654]'])[last()]", document, null, XPathResult.ANY_TYPE, null);
@@ -11,16 +12,24 @@ try{
     return "😫你发送的次数太多啦，一小时之后再来吧"
   }
   if (element) {
-    var children = element.children;
-      for (var i = 0; i < children.length; i++) {
-        if (children[i].tagName === "P") {
-          output += children[i].outerHTML + "\n";
-        } else if (children[i].tagName === "OL") {
-          var listItems = children[i].getElementsByTagName("li");
-            for (var j = 0; j < listItems.length; j++) {
-            output += listItems[j].outerHTML + "\n";
+    for (let i = 0; i < childElements.length; i++) {
+        if (childElements[i].tagName === 'TABLE') {
+            var trElements = childElements[i].querySelectorAll('tr');
+            
+
+            for (let j = 0; j < trElements.length; j++) {
+                var thElements = trElements[j].querySelectorAll('th, td');
+                var thoutput = ""
+                for(let n = 0; n < thElements.length; n++){
+                    thoutput += (thElements[n].textContent + "\t|\t").toString();
+                }
+                output += thoutput + "\n";
             }
-          }
+        }
+
+         else {
+            output += childElements[i].textContent + "\n";
+        }
       }
   }
   return output;
