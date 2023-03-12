@@ -70,6 +70,7 @@ with open("./js/ghotmail_account.csv", "r") as file:
             log(row['email'])
             gpt_accounts.append(account)
             log(f"{row['email']} 登陆成功")
+
         except Exception:
             log(f"token账户登录出现问题:   {row}")
 
@@ -103,14 +104,39 @@ with open("./js/user_account.csv", "r") as file:
 @run_sync
 def askGPT_nobowser(gptbot,question,convid=None):
     prev_text = ""
-    for data in gptbot.ask(
-        prompt=question,
-        conversation_id=convid
-    ):
-        #print(data)
-        message = data["message"][len(prev_text) :]
-        #print(message, end="", flush=True)
-        prev_text = data["message"]
+
+    # covid='7ae51b08-a450-437f-ae06-35d903c6616a'
+    # allgistory = chatbot.get_msg_history(covid)
+    # parid= str(list(allgistory['mapping'].keys())[-1])
+    # for data in chatbot.ask(
+    #     prompt = "厉害",
+    #     conversation_id=covid,
+    #     parent_id=parid
+    # ):
+    #     response = data["message"]
+    # log(response)
+
+
+    if(convid is None):
+        for data in gptbot.ask(
+            prompt=question,
+            conversation_id=convid
+        ):
+            #print(data)
+            message = data["message"][len(prev_text) :]
+            #print(message, end="", flush=True)
+            prev_text = data["message"]
+    else:
+        allgistory = gptbot.get_msg_history(convid)
+        parid= str(list(allgistory['mapping'].keys())[-1])
+        for data in gptbot.ask(
+            prompt = question,
+            conversation_id  = convid,
+            parent_id = parid
+        ):
+            #print(data)
+            #print(message, end="", flush=True)
+            prev_text = data["message"]
     return prev_text
 
 # #   等待GPT回复
@@ -154,7 +180,9 @@ async def _(event: GroupMessageEvent):
                     set_gpt_accounts(account_list)
 
 
-                    gpt_result = await  askGPT_nobowser(bot, str(user_msg), str(row[3]))
+                    gpt_result = await askGPT_nobowser(bot, str(user_msg), str(row[3]))
+
+
                     c.execute("UPDATE userinfo SET conversationid = ? WHERE userid = ?", (str(row[3]), str(uid)))
                     conn.commit()
 
@@ -169,7 +197,7 @@ async def _(event: GroupMessageEvent):
 
     #这里放一个更新点，如果有GPT账户没有被任何人使用，那就给用户分配那个没被使用的账户
     
-        #如果数据库记录中有用户使用记录，但是它使用的账号和对话不在这次的所有登陆GPT账号中，则删除所有这个用户在数据库中的数据，并视为新用户
+    #如果数据库记录中有用户使用记录，但是它使用的账号和对话不在这次的所有登陆GPT账号中，则删除所有这个用户在数据库中的数据，并视为新用户
     c.execute("DELETE FROM userinfo WHERE userid = ?", (str(uid),))
     conn.commit()
     log(f'新用户{uid}') 
