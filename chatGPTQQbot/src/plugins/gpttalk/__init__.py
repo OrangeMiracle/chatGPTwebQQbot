@@ -51,15 +51,15 @@ with open("./js/black_list.csv", "r") as file:
         except Exception:
             log("加载黑名单出现问题")
 
-#  读取GPT session_token信息登录
+#  读取GPT access_token信息登录
 with open("./js/ghotmail_account.csv", "r") as file:
     reader = csv.DictReader(file)
     for row in reader:
         try:
             plus_status = row['plus_status'].lower()
-            token = row['session_token']
+            token = row['access_token']
             config = {
-                "session_token": token,
+                "access_token": token,
                 "paid": False
                 if not ("true" in plus_status)
                 else    True,
