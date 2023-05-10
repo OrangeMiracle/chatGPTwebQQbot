@@ -163,7 +163,7 @@ async def _(event: GroupMessageEvent):
     user_msg = event.message
     c.execute("SELECT * FROM userinfo WHERE userid = ?", [str(uid)])
     row = c.fetchone()
-    time.sleep(0.5)
+    await asyncio.sleep(0.5)
     account_list = get_gpt_accounts()
     if row is not None and not('None' in row[3]):
         i = 0
@@ -173,7 +173,7 @@ async def _(event: GroupMessageEvent):
             if((row[2] in email)): #这里需要确认   1.群友上次用的是哪一个账号  
                 if(str(row[3]) in str(account_list[i].bot.get_conversations())): #2.它使用的对话是否还存在
                     while('working' in account_list[i].status):
-                        time.sleep(0.5)
+                        await asyncio.sleep(0.5)
                         account_list = get_gpt_accounts()
                     
                     account_list[i].status = 'working'
@@ -205,10 +205,10 @@ async def _(event: GroupMessageEvent):
     while(True):
         log('新用户while')
         i = 0
-        time.sleep(0.5)
+        await asyncio.sleep(0.5)
         account_list = get_gpt_accounts()
         for x in account_list:
-            time.sleep(0.2)
+            await asyncio.sleep(0.2)
             if('working' in x.status):  #为啥我要用一个list里面的值表示状态来标记当前任务是否能用呢，因为我还没学会多线程😅
                 account_list = get_gpt_accounts()
             else:
@@ -286,7 +286,7 @@ if(active_bowser):
     async def _(event: GroupMessageEvent):
         uid=event.user_id
         chatgpt.open(refresh=True)
-        time.sleep(2)
+        await asyncio.sleep(2)
         GPTIO.log(chatgpt.GPT_status)
         chatgpt.GPT_status = chatgpt.gptBusyorFree()
         GPTIO.log(chatgpt.GPT_status)
