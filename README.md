@@ -1,3 +1,5 @@
+！！此项目已停止维护
+
 # 把chatGPT部署到你的QQ
 这个项目是一个基于nonebotv2开发的插件，需要配合go-cqhttp登陆QQ机器人，成功绕过网页端检测，能够把chatGPT部署到QQ
 
